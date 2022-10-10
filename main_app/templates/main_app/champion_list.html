@@ -8,10 +8,10 @@ Main List | LoL Champion Collector
 
 {% block content %}
 
-<h1>Main Champions List</h1>
+<h1>Champions List</h1>
 
 {% for champ in object_list %}
-<a href="{% url 'mains_detail' champ.id %}">
+<a href="{% url 'champions_detail' champ.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ champ.name }}</span>
