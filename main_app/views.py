@@ -13,3 +13,7 @@ class ChampionList(ListView):
 
 class ChampionDetail(DetailView):
     model = Champion
+
+class ChampionCreate(CreateView):
+    model = Champion
+    fields = '__all__'
