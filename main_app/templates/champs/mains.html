@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Main Champions List</h1>
+
+{% for champ in mains %}
+<a href="{% url 'detail' champ.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ champ.name }}</span>
+            <h6> {{ champ.epithet }}</h6>
+            <p>Roles: {{ champ.role }}</p>
+            <p>Hours Played: {{ champ.hours }}</p>
+        </div>
+    </div>
+</a>
+
+{% endfor %}
+
+{% endblock %}
