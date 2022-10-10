@@ -17,6 +17,7 @@ Details for {{ object.name }} | LoL Champion Collector
     </div>
     <div class="card-action">
         <a href="{% url 'champions_update' object.id %}">Update</a>
+        <a href="{% url 'champions_delete' object.id %}">Delete</a>
     </div>
 </div>
 
