@@ -17,3 +17,7 @@ class ChampionDetail(DetailView):
 class ChampionCreate(CreateView):
     model = Champion
     fields = '__all__'
+
+class ChampionUpdate(UpdateView):
+    model = Champion
+    fields = '__all__'
