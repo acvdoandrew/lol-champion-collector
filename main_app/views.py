@@ -21,3 +21,7 @@ class ChampionCreate(CreateView):
 class ChampionUpdate(UpdateView):
     model = Champion
     fields = '__all__'
+
+class ChampionDelete(DeleteView):
+    model = Champion
+    success_url = '/champions/'
