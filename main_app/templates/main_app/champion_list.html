@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 
+{% block title %}
+
+Main List | LoL Champion Collector
+
+{% endblock %}
+
 {% block content %}
 
 <h1>Main Champions List</h1>
 
-{% for champ in mains %}
+{% for champ in object_list %}
 <a href="{% url 'mains_detail' champ.id %}">
     <div class="card">
         <div class="card-content">
@@ -15,7 +21,6 @@
         </div>
     </div>
 </a>
-
 {% endfor %}
 
 {% endblock %}
