@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Champion
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 def home(request):
     return render(request, 'home.html')
@@ -11,6 +11,5 @@ def about(request):
 class ChampionList(ListView):
     model = Champion
 
-def champ_detail(request, champ_id):
-    champ = Champion.objects.get(id=champ_id)
-    return render(request, 'champs/detail.html', {'champ': champ})
+class ChampionDetail(DetailView):
+    model = Champion
