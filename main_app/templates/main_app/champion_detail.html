@@ -15,6 +15,9 @@ Details for {{ object.name }} | LoL Champion Collector
         <h6>Roles: {{ object.role }}</h6>
         <h6>Hours Played: {{ object.hours }}</h6>
     </div>
+    <div class="card-action">
+        <a href="{% url 'champions_update' object.id %}">Update</a>
+    </div>
 </div>
 
 {% endblock %}
