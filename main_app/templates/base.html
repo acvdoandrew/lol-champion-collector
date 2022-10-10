@@ -19,12 +19,12 @@
         <div class="nav-wrapper">
           <ul>
             <li>
-              <a href="/" class="left brand-logo">&nbsp;&nbsp;LoL Champion Collector</a>
+              <a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;LoL Champion Collector</a>
             </li>
           </ul>
           <ul class="right">
-            <li><a href="/about">About</a></li>
-            <li><a href="/mains">View My Mains</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'mains_index'%}">View My Mains</a></li>
           </ul>
         </div>
       </nav>
