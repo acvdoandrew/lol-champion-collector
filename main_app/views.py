@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Champion
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import MatchesForm
 
 def home(request):
     return render(request, 'home.html')
@@ -8,11 +9,21 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def add_match(request, pk):
+    form = MatchesForm(request.POST)
+    if form.is_valid():
+        new_match = form.save(commit=False)
+        new_match.champion_id = pk
+        new_match.save()
+    return redirect('champions_detail', pk=pk)
+
 class ChampionList(ListView):
     model = Champion
 
 class ChampionDetail(DetailView):
+    matches_form = MatchesForm()
     model = Champion
+    extra_context = {'matches_form': matches_form}
 
 class ChampionCreate(CreateView):
     model = Champion

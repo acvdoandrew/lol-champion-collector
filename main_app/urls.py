@@ -9,4 +9,5 @@ urlpatterns = [
     path('champions/create/', views.ChampionCreate.as_view(), name='champions_create'),
     path('champions/<int:pk>/update/', views.ChampionUpdate.as_view(), name='champions_update'),
     path('champions/<int:pk>/delete/', views.ChampionDelete.as_view(), name='champions_delete'),
+    path('champions/<int:pk>/add_match', views.add_match, name='add_match'),
 ]

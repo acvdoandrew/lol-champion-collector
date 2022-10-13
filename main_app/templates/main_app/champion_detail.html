@@ -25,6 +25,13 @@ Details for {{ object.name }} | LoL Champion Collector
         </div>
     </div>
     <div class="col s6">
+
+        <form action="{% url 'add_match' object.id %}" method="POST">
+            {% csrf_token %}
+            {{ matches_form.as_p }}
+            <input type="submit" value="Add Match" class="btn blue">
+        </form>
+
         <table class="stripped">
             <thead>
                 <tr>
@@ -43,5 +50,19 @@ Details for {{ object.name }} | LoL Champion Collector
         </table>
     </div>
 </div>
+
+<script>
+    const dateField = document.getElementById('id_date')
+    const matchSelect = document.getElementById('id_match')
+
+    M.Datepicker.init(dateField, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+
+    M.FormSelect.init(matchSelect);
+</script>
 
 {% endblock %}
