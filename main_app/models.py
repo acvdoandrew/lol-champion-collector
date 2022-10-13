@@ -1,5 +1,3 @@
-from audioop import reverse
-from unicodedata import name
 from django.db import models
 from django.urls import reverse
 
@@ -15,3 +13,14 @@ class Champion(models.Model):
     def get_absolute_url(self):
         return reverse('champions_detail', kwargs={'pk': self.id })
 
+class Matches(models.Model):
+    RESULTS = (
+        ('V', 'VICTORY'),
+        ('D', 'DEFEAT'),
+    )
+    date = models.DateField('match date')
+    match = models.CharField(max_length=1, choices=RESULTS, default=RESULTS[0][0])
+    champion = models.ForeignKey(Champion, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.get_match_display()} on {self.date}'
