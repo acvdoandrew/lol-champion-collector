@@ -27,7 +27,7 @@ class ChampionDetail(DetailView):
 
 class ChampionCreate(CreateView):
     model = Champion
-    fields = '__all__'
+    fields = ('name', 'role', 'epithet', 'hours')
 
 class ChampionUpdate(UpdateView):
     model = Champion
