@@ -9,9 +9,9 @@ main {
 }
 
 nav {
-    background-color: dodgerblue;
+    background-color: dodgerblue !important;
 }
 
 .page-footer {
-    background-color: dodgerblue;
+    background-color: dodgerblue !important;
 }
