@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Skin Themes | LoL Champion Collector
+{% endblock %}
+
+{% block content %}
+
+<h1>Skin Themes List</h1>
+
+{% for skin in object_list %}
+
+<a href="{% url 'skins_detail' skin.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ skin.name }}</span>
+        </div>
+    </div>
+</a>
+
+{% endfor %}
+
+{% endblock %}
