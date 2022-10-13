@@ -35,4 +35,4 @@ class SkinTheme(models.Model):
         return f'{self.name}'
 
     def get_absolute_url(self):
-        return reverse('skin_detail', kwargs={'pk': self.id})
+        return reverse('skins_detail', kwargs={'pk': self.id})
