@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Champion
+from .models import Champion, SkinTheme
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import MatchesForm
 
@@ -36,3 +36,21 @@ class ChampionUpdate(UpdateView):
 class ChampionDelete(DeleteView):
     model = Champion
     success_url = '/champions/'
+
+class SkinList(ListView):
+    model = SkinTheme
+
+class SkinCreate(CreateView):
+    model = SkinTheme
+    fields = '__all__'
+
+class SkinDetail(DetailView):
+    model = SkinTheme
+
+class SkinUpdate(UpdateView):
+    model = SkinTheme
+    fields = '__all__'
+
+class SkinDelete(DeleteView):
+    model = SkinTheme
+    success_url = '/skins/'
