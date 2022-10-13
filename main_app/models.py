@@ -1,11 +1,23 @@
 from django.db import models
 from django.urls import reverse
 
+
+class SkinTheme(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.name}'
+
+    def get_absolute_url(self):
+        return reverse('skins_detail', kwargs={'pk': self.id})
+
+
 class Champion(models.Model):
     name = models.CharField(max_length=50)
     role = models.CharField(max_length=50)
     epithet = models.TextField(max_length=100)
     hours = models.IntegerField()
+    skins = models.ManyToManyField(SkinTheme)
 
     def __str__(self):
         return self.name
@@ -28,11 +40,3 @@ class Matches(models.Model):
     class Meta:
         ordering = ['-date']
 
-class SkinTheme(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return f'{self.name}'
-
-    def get_absolute_url(self):
-        return reverse('skins_detail', kwargs={'pk': self.id})
