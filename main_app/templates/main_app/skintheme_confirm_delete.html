@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Confirmation | LoL Champion Collector
+{% endblock %}
+
+{% block content %}
+
+<h1>Skin Delete</h1>
+
+<h4>Are you sure you want to <span class="red-text">delete</span> the {{ object.name }} skin theme?</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete" class="btn red">
+    <a href="{% url 'skins_detail' object.id %}" class="btn blue">Cancel</a>
+</form>
+
+{% endblock %}
