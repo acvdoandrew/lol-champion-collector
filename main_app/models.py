@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class SkinTheme(models.Model):
@@ -18,6 +19,7 @@ class Champion(models.Model):
     epithet = models.TextField(max_length=100)
     hours = models.IntegerField()
     skins = models.ManyToManyField(SkinTheme)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
