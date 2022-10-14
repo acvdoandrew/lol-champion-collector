@@ -1,3 +1,5 @@
+from multiprocessing import context
+from time import timezone
 from django.shortcuts import redirect, render
 from .models import Champion, SkinTheme
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -21,9 +23,16 @@ class ChampionList(ListView):
     model = Champion
 
 class ChampionDetail(DetailView):
-    matches_form = MatchesForm()
     model = Champion
-    extra_context = {'matches_form': matches_form}
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ChampionDetail, self).get_context_data(*args, **kwargs)
+        matches_form = MatchesForm()
+        champion = self.get_object()
+        skins_not_assoc = SkinTheme.objects.exclude(id__in = champion.skins.all().values_list('id'))
+        context['matches_form'] = matches_form
+        context['skins'] = skins_not_assoc
+        return context
 
 class ChampionCreate(CreateView):
     model = Champion
