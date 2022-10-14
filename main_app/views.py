@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from .models import Champion, SkinTheme
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from .forms import MatchesForm
 
 def home(request):
@@ -20,6 +22,20 @@ def add_match(request, pk):
 def assoc_skin(request, pk, skin_id):
     Champion.objects.get(id=pk).skins.add(skin_id)
     return redirect('champions_detail', pk=pk)
+
+def signup(request):
+    error_message = None
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('champions_index')
+        else:
+            error_message = 'Signup input invalid - Please try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error': error_message}
+    return render(request, 'registration/signup.html', context)
 
 class ChampionList(ListView):
     model = Champion
