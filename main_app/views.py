@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import MatchesForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def home(request):
     return render(request, 'home.html')
@@ -11,6 +13,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def add_match(request, pk):
     form = MatchesForm(request.POST)
     if form.is_valid():
@@ -19,6 +22,7 @@ def add_match(request, pk):
         new_match.save()
     return redirect('champions_detail', pk=pk)
 
+@login_required
 def assoc_skin(request, pk, skin_id):
     Champion.objects.get(id=pk).skins.add(skin_id)
     return redirect('champions_detail', pk=pk)
@@ -37,12 +41,12 @@ def signup(request):
     context = {'form': form, 'error': error_message}
     return render(request, 'registration/signup.html', context)
 
-class ChampionList(ListView):
+class ChampionList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         return Champion.objects.filter(user=user)
 
-class ChampionDetail(DetailView):
+class ChampionDetail(LoginRequiredMixin, DetailView):
     model = Champion
 
     def get_context_data(self, *args, **kwargs):
@@ -54,7 +58,7 @@ class ChampionDetail(DetailView):
         context['skins'] = skins_not_assoc
         return context
 
-class ChampionCreate(CreateView):
+class ChampionCreate(LoginRequiredMixin, CreateView):
     model = Champion
     fields = ('name', 'role', 'epithet', 'hours')
 
@@ -62,28 +66,28 @@ class ChampionCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class ChampionUpdate(UpdateView):
+class ChampionUpdate(LoginRequiredMixin, UpdateView):
     model = Champion
     fields = '__all__'
 
-class ChampionDelete(DeleteView):
+class ChampionDelete(LoginRequiredMixin, DeleteView):
     model = Champion
     success_url = '/champions/'
 
-class SkinList(ListView):
+class SkinList(LoginRequiredMixin, ListView):
     model = SkinTheme
 
-class SkinCreate(CreateView):
-    model = SkinTheme
-    fields = '__all__'
-
-class SkinDetail(DetailView):
-    model = SkinTheme
-
-class SkinUpdate(UpdateView):
+class SkinCreate(LoginRequiredMixin, CreateView):
     model = SkinTheme
     fields = '__all__'
 
-class SkinDelete(DeleteView):
+class SkinDetail(LoginRequiredMixin, DetailView):
+    model = SkinTheme
+
+class SkinUpdate(LoginRequiredMixin, UpdateView):
+    model = SkinTheme
+    fields = '__all__'
+
+class SkinDelete(LoginRequiredMixin, DeleteView):
     model = SkinTheme
     success_url = '/skins/'
