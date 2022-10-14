@@ -1,6 +1,4 @@
-from unicodedata import name
-from urllib import request
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from .models import Champion, SkinTheme
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
