@@ -1,4 +1,6 @@
-from django.shortcuts import redirect, render
+from unicodedata import name
+from urllib import request
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Champion, SkinTheme
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
@@ -38,7 +40,9 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 class ChampionList(ListView):
-    model = Champion
+    def get_queryset(self):
+        user = self.request.user
+        return Champion.objects.filter(user=user)
 
 class ChampionDetail(DetailView):
     model = Champion
