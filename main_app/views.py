@@ -1,5 +1,3 @@
-from multiprocessing import context
-from time import timezone
 from django.shortcuts import redirect, render
 from .models import Champion, SkinTheme
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -41,6 +39,10 @@ class ChampionDetail(DetailView):
 class ChampionCreate(CreateView):
     model = Champion
     fields = ('name', 'role', 'epithet', 'hours')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class ChampionUpdate(UpdateView):
     model = Champion
