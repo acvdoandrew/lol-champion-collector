@@ -28,10 +28,15 @@
           </ul>
           <ul class="right">
             <li><a href="{% url 'about' %}">About</a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url 'skins_create' %}">Add a Skin Theme</a></li>
             <li><a href="{% url 'skins_index' %}">View My Skins</a></li>
             <li><a href="{% url 'champions_index' %}">View My Champions</a></li>
             <li><a href="{% url 'champions_create' %}">Add a New Champion</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>
