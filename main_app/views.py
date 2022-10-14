@@ -19,6 +19,10 @@ def add_match(request, pk):
         new_match.save()
     return redirect('champions_detail', pk=pk)
 
+def assoc_skin(request, pk, skin_id):
+    Champion.objects.get(id=pk).skins.add(skin_id)
+    return redirect('champions_detail', pk=pk)
+
 class ChampionList(ListView):
     model = Champion
 

@@ -77,7 +77,7 @@ Details for {{ object.name }} | LoL Champion Collector
                         <span class="card-title">{{ skin.name }}</span>
                     </div>
                     <div class="card-action">
-                        <form action="" method="POST">
+                        <form action="{% url 'assoc_skin' object.id skin.id %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="btn blue">Add</button>
                         </form>
