@@ -16,4 +16,5 @@ urlpatterns = [
     path('skins/<int:pk>/update/', views.SkinUpdate.as_view(), name='skins_update'),
     path('skins/<int:pk>/delete/', views.SkinDelete.as_view(), name='skins_delete'),
     path('champions/<int:pk>/assoc_skin/<int:skin_id>/', views.assoc_skin, name='assoc_skin'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
