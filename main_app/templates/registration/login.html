@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Please Log In | LoL Champion Collector
+{% endblock %}
+
+{% block content %}
+
+<h1>Log In </h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="login" class="btn blue">
+</form>
+
+{% endblock %}
